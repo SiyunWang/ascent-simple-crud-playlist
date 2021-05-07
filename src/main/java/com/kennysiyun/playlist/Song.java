@@ -6,6 +6,9 @@ public class Song {
     private String artist;
     private String album;
 
+    public Song() {
+    }
+
     public Song(int id, String name, String artist) {
         this.id = id;
         this.name = name;

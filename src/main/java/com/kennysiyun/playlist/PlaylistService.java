@@ -9,8 +9,9 @@ import java.util.List;
 public class PlaylistService {
     List<Song> myPlaylist = new ArrayList<>();
 
-    public void addSong(Song song) {
+    public Song addSong(Song song) {
         myPlaylist.add(song);
+        return song;
     }
 
     public Song getSongById(int anyInt) {
