@@ -47,11 +47,20 @@ public class PlaylistService {
         return resultList;
     }
 
-    public Song updateSongById(int id) {
+    public Song updateSongById(int id, Song updatedSong) {
+        for (Song song : myPlaylist) {
+            if (song.getId() == id) {
+                myPlaylist.set(id, updatedSong);
+                return updatedSong;
+            }
+        }
         return null;
     }
 
-    public Song deleteSongById(int anyInt) {
-        return null;
+    public Song deleteSongById(int id) {
+        Song songDeleted = getSongById(id);
+        if (getSongById(id) == null) return null;
+        myPlaylist.remove(songDeleted);
+        return songDeleted;
     }
 }

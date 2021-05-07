@@ -76,7 +76,7 @@ class PlaylistControllerTest {
     @Test
     void updateSongById() throws Exception {
         Song expected = new Song (1, "New Song", "New Artist", "New Album");
-        when(playlistService.updateSongById(anyInt())).thenReturn(expected);
+        when(playlistService.updateSongById(anyInt(), any(Song.class))).thenReturn(expected);
 
         mockMvc.perform(put("/songs/1")
                             .content("{\"id\":\"1\",\"name\":\"New Song\",\"artist\":\"New Artist\",\"album\":\"New Album\"}")
