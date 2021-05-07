@@ -17,11 +17,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @WebMvcTest
 class PlaylistControllerTest {
@@ -73,20 +72,20 @@ class PlaylistControllerTest {
                 .andExpect(jsonPath("name").value("random-name"));
     }
 
+    @Test
+    void updateSongById() throws Exception {
+        Song expected = new Song (1, "New Song", "New Artist", "New Album");
+        when(playlistService.updateSongById(anyInt())).thenReturn(expected);
+
+        mockMvc.perform(put("/songs/1")
+                            .content("{\"id\":\"1\",\"name\":\"New Song\",\"artist\":\"New Artist\",\"album\":\"New Album\"}")
+                            .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("New Song"));
+
+    }
+
 
 
 }
-
-// "{\"id\":\"9\",\"name\":\"random-name\",\"artist\":\"random-artist\",\"album\":\"default\"}"
-// "{\"userName\":\"testUserDetails\",\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"password\":\"xxx\"}"
-
-//    public void createEmployeeAPI() throws Exception
-//    {
-//        mvc.perform( MockMvcRequestBuilders
-//                .post("/employees")
-//                .content(asJsonString(new EmployeeVO(null, "firstName4", "lastName4", "email4@mail.com")))
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.employeeId").exists());
-//    }

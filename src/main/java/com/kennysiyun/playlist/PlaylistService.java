@@ -14,9 +14,9 @@ public class PlaylistService {
         return song;
     }
 
-    public Song getSongById(int anyInt) {
+    public Song getSongById(int id) {
         for (Song song : myPlaylist) {
-            if (anyInt == song.getId()) {
+            if (id == song.getId()) {
                 return song;
             }
         }
@@ -24,6 +24,10 @@ public class PlaylistService {
     }
 
     public List<Song> getAllSongs() {
+        return null;
+    }
+
+    public Song updateSongById(int id) {
         return null;
     }
 }

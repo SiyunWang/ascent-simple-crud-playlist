@@ -28,4 +28,8 @@ public class PlaylistController {
         return playlistService.addSong(song);
     }
 
+    @PutMapping("/{id}")
+    public Song updateSongById(@PathVariable int id) {
+        return playlistService.updateSongById(id);
+    }
 }
