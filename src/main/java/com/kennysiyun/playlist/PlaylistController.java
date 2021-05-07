@@ -32,4 +32,9 @@ public class PlaylistController {
     public Song updateSongById(@PathVariable int id) {
         return playlistService.updateSongById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public Song deleteSongById(@PathVariable int id) {
+        return playlistService.deleteSongById(id);
+    }
 }

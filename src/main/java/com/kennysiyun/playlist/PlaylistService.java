@@ -30,4 +30,8 @@ public class PlaylistService {
     public Song updateSongById(int id) {
         return null;
     }
+
+    public Song deleteSongById(int anyInt) {
+        return null;
+    }
 }

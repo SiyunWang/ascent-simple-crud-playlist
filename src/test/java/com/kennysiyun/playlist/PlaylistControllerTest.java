@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -86,6 +87,14 @@ class PlaylistControllerTest {
 
     }
 
-
+    @Test
+    void deleteSongById() throws Exception {
+        Song expected = new Song (3, "deleted Song", "deleted Artist", "deleted Album");
+        when(playlistService.deleteSongById(anyInt())).thenReturn(expected);
+        mockMvc.perform(delete("/songs/3"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("deleted Song"));
+    }
 
 }
