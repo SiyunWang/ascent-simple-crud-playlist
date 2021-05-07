@@ -24,15 +24,27 @@ public class PlaylistService {
     }
 
     public List<Song> getAllSongs() {
-        return null;
+        return myPlaylist;
     }
 
     public List<Song> getSongsByName(String name) {
-        return null;
+        List<Song> resultList = new ArrayList<>();
+        for (Song song : myPlaylist) {
+            if (song.getName().equals(name)) {
+                resultList.add(song);
+            }
+        }
+        return resultList;
     }
 
     public List<Song> getSongsByArtist(String artist) {
-        return null;
+        List<Song> resultList = new ArrayList<>();
+        for (Song song : myPlaylist) {
+            if (song.getArtist().equals(artist)) {
+                resultList.add(song);
+            }
+        }
+        return resultList;
     }
 
     public Song updateSongById(int id) {

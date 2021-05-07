@@ -33,4 +33,36 @@ class PlaylistServiceTest {
         Song expected = testPlaylist.get(1);
         assertEquals(expected, playlistService.getSongById(expected.getId()));
     }
+
+    @Test
+    void getAllSongs() {
+        List<Song> expected = testPlaylist;
+        assertEquals(expected, playlistService.getAllSongs());
+    }
+
+    @Test
+    void getSongsByName_Exists() {
+        List<Song> expected = new ArrayList<>();
+        expected.add(testPlaylist.get(1));
+        assertEquals(expected, playlistService.getSongsByName("name1"));
+    }
+
+    @Test
+    void getSongsByName_NotExists() {
+        List<Song> expected = new ArrayList<>();
+        assertEquals(expected, playlistService.getSongsByName("name not exist"));
+    }
+
+    @Test
+    void getSongsByArtist_Exists() {
+        List<Song> expected = new ArrayList<>();
+        expected.add(testPlaylist.get(2));
+        assertEquals(expected, playlistService.getSongsByArtist("artist2"));
+    }
+
+    @Test
+    void getSongsByArtist_NotExists() {
+        List<Song> expected = new ArrayList<>();
+        assertEquals(expected, playlistService.getSongsByArtist("artist not exist"));
+    }
 }
