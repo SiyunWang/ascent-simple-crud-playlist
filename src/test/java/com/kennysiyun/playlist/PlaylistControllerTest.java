@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -45,5 +46,15 @@ class PlaylistControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(9));
     }
+
+    @Test
+    void getAllSongs() throws Exception {
+        when(playlistService.getAllSongs()).thenReturn(songs);
+        mockMvc.perform(get("/songs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(10)));
+    }
+
+
 
 }

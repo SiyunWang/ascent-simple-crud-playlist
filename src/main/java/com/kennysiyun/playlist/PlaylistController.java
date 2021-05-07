@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/songs")
 public class PlaylistController {
@@ -19,4 +21,8 @@ public class PlaylistController {
         return playlistService.getSongById(id);
     }
 
+    @GetMapping
+    public List<Song> getAllSongs() {
+        return playlistService.getAllSongs();
+    }
 }

@@ -22,4 +22,7 @@ public class PlaylistService {
         return null;
     }
 
+    public List<Song> getAllSongs() {
+        return null;
+    }
 }
