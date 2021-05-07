@@ -1,22 +1,27 @@
 package com.kennysiyun.playlist;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @WebMvcTest
 class PlaylistControllerTest {
@@ -44,6 +49,52 @@ class PlaylistControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(9));
+    }
+
+    @Test
+    void getAllSongs() throws Exception {
+        when(playlistService.getAllSongs()).thenReturn(songs);
+        mockMvc.perform(get("/songs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(10)));
+    }
+
+    @Test
+    void addSong() throws Exception {
+        Song expected = new Song(9, "random-name", "random-artist");
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(expected);
+        when(playlistService.addSong(any(Song.class))).thenReturn(expected);
+        mockMvc.perform(post("/songs")
+                            .content("{\"id\":\"9\",\"name\":\"random-name\",\"artist\":\"random-artist\",\"album\":\"default\"}")
+                            .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("random-name"));
+    }
+
+    @Test
+    void updateSongById() throws Exception {
+        Song expected = new Song (1, "New Song", "New Artist", "New Album");
+        when(playlistService.updateSongById(anyInt())).thenReturn(expected);
+
+        mockMvc.perform(put("/songs/1")
+                            .content("{\"id\":\"1\",\"name\":\"New Song\",\"artist\":\"New Artist\",\"album\":\"New Album\"}")
+                            .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("New Song"));
+
+    }
+
+    @Test
+    void deleteSongById() throws Exception {
+        Song expected = new Song (3, "deleted Song", "deleted Artist", "deleted Album");
+        when(playlistService.deleteSongById(anyInt())).thenReturn(expected);
+        mockMvc.perform(delete("/songs/3"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("deleted Song"));
     }
 
 }

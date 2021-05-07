@@ -58,7 +58,10 @@ paths:
       responses:
         200:
           description: OK
-          content: { }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/song'
         405:
           description: Invalid input
           content: { }
