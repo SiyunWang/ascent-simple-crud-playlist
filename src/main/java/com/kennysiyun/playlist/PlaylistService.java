@@ -48,9 +48,10 @@ public class PlaylistService {
     }
 
     public Song updateSongById(int id, Song updatedSong) {
-        for (Song song : myPlaylist) {
+        for (int i = 0; i < myPlaylist.size(); i++) {
+            Song song = myPlaylist.get(i);
             if (song.getId() == id) {
-                myPlaylist.set(id, updatedSong);
+                myPlaylist.set(i, updatedSong);
                 return updatedSong;
             }
         }
