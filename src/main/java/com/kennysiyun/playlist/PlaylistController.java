@@ -31,8 +31,8 @@ public class PlaylistController {
     }
 
     @PutMapping("/{id}")
-    public Song updateSongById(@PathVariable int id) {
-        return playlistService.updateSongById(id);
+    public Song updateSongById(@PathVariable int id, @RequestBody Song song) {
+        return playlistService.updateSongById(id, song);
     }
 
     @DeleteMapping("/{id}")
