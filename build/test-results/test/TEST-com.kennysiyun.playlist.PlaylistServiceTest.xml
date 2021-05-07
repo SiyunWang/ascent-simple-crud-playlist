@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kennysiyun.playlist.PlaylistServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-07T18:28:25" hostname="Siyuns-MacBook-Pro.local" time="0.279">
+  <properties/>
+  <testcase name="getSongById()" classname="com.kennysiyun.playlist.PlaylistServiceTest" time="0.279"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
