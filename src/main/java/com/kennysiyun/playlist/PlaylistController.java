@@ -19,7 +19,9 @@ public class PlaylistController {
     }
 
     @GetMapping
-    public List<Song> getAllSongs() {
+    public List<Song> getAllSongs(@RequestParam(required = false) String name, @RequestParam(required = false) String artist) {
+        if (name != null) return playlistService.getSongsByName(name);
+        if (artist != null) return playlistService.getSongsByArtist(artist);
         return playlistService.getAllSongs();
     }
 

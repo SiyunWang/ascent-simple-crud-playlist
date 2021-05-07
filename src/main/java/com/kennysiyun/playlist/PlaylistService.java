@@ -27,6 +27,14 @@ public class PlaylistService {
         return null;
     }
 
+    public List<Song> getSongsByName(String name) {
+        return null;
+    }
+
+    public List<Song> getSongsByArtist(String artist) {
+        return null;
+    }
+
     public Song updateSongById(int id) {
         return null;
     }
